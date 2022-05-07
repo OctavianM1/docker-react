@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true octavianmitu/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: docker-react
+  env: docker-react-env
+  bucket_name: elasticbeanstalk-eu-central-1-656983766737
+  bucket_path: docker-react
+  on:
+    branch: main
+  access_key_id: $access_key_id
+  secret_access_key:
+    secure: $secure_access_key
